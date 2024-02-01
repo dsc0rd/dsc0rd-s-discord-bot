@@ -9,12 +9,12 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.hooks.AnnotatedEventManager;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-
 import java.io.*;
 import java.time.LocalDateTime;
 import java.util.Calendar;
-
 import javax.security.auth.login.LoginException;
+
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class Launcher {
 
@@ -26,18 +26,23 @@ public class Launcher {
 
     public static void main(String[] args) throws LoginException {
         try {
+
+            Dotenv dotenv = Dotenv.load();
             config = new Config();
-            jda = JDABuilder.createDefault(config.getString("token")).enableIntents(GatewayIntent.MESSAGE_CONTENT)
+            path = config.getString("logFile");
+            if (!new File(path).exists())
+                new File(path).createNewFile();
+            logfile = new FileWriter(path, true);
+            jda = JDABuilder.createDefault(dotenv.get("DISCORD_BOT_TOKEN")).enableIntents(GatewayIntent.MESSAGE_CONTENT)
                     .setEventManager(new AnnotatedEventManager())
                     .addEventListeners(new Bot(config.getString("prefix")))
                     .build().awaitReady();
-            path = local ? System.getProperty("user.dir") + "\\log.log" : "/home/admin/discord/log.log";
-            logfile = new FileWriter(path, true);
+
         } catch (InterruptedException | IOException e) {
             logError(e.getLocalizedMessage());
-        } finally {
+        } 
             log("Ready! @ " + Calendar.getInstance().getTime().toString());
-        }
+        
     }
 
     public static void log(String log) {

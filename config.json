@@ -1,4 +1,6 @@
 {
+  "commandFile": "./commands.json",
+  "logFile": "./log.log",
   "prefix": "~",
   "allowedCommands": [
     "say",
@@ -6,6 +8,5 @@
     "choose",
     "cmd",
     "commandHelp"
-  ],
-  "commandFile": "./commands.json"
+  ]
 }
