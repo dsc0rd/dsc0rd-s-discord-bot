@@ -1,0 +1,49 @@
+{
+  "8ball": {
+    "prefab": [
+      ":8ball: 8ball",
+      "  %s"
+    ],
+    "responses": [
+      "Ja",
+      "Nein",
+      "Ask again later",
+      "Most definitely yes",
+      "Don't even think about it",
+      "Do you even need to ask?",
+      "Sure thing"
+    ],
+    "title": [
+      ":question: Question",
+      "%m"
+    ]
+  },
+  "say": {
+    "prefab": [
+      "%s"
+    ],
+    "responses": [
+      "%m"
+    ]
+  },
+  "choose": {
+    "prefab": [
+      "%s"
+    ],
+    "responses": [
+      "%rsmp"
+    ],
+    "title": [
+      ":thinking: Hmm"
+    ],
+    "splitter": ";"
+  },
+  "commandHelp": {
+    "prefab": [
+      "%s"
+    ],
+    "responses": [
+      "The following is the list of usable parts for prefabs and responses.\n %s - random string from data written in responses array   %u - author name   %m original message without command name and prefix   %rsmp - randomly selected message part. ATTENTION: HAVING THIS ARGUMENT ASSUMES THAT YOUR COMMAND HAS A SEPARATE SPLITTER DESIGNATED. TAKE A LOOK AT CHOOSE COMMAND FOR AN EXAMPLE"
+    ]
+  }
+}

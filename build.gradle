@@ -1,0 +1,53 @@
+group 'main.dsc0rd'
+version '0.1-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'main.dsc0rd.Launcher'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+    maven { url 'https://jitpack.io' }
+    mavenCentral()
+}
+
+dependencies {
+    compile 'io.github.cdimascio:dotenv-java:3.0.0'
+    compile 'net.dv8tion:JDA:5.0.0-beta.20'
+    compile group: 'org.json', name: 'json', version: '20200518'
+    compile group: 'org.jsoup', name: 'jsoup', version: '1.7.2'
+    compile group: 'org.slf4j', name: 'slf4j-nop', version: '1.7.25'
+    compile group: 'ca.pjer', name: 'chatter-bot-api', version: '2.0.1'
+    compile group: 'org.openweathermap.java-api', name: 'api-common', version: '1.2'
+    compile group: 'org.openweathermap.java-api', name: 'api-core', version: '1.2'
+    compile group: 'org.openweathermap.java-api', name: 'api-model', version: '1.2'
+    compile 'com.github.haq:imgur-uploader:1.0'
+    compile group: 'commons-io', name: 'commons-io', version: '2.5'
+
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+jar {
+    exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
+
+    manifest {
+        attributes 'Main-Class': 'main.dsc0rd.Launcher',
+                'Class-Path': configurations.runtime.files.collect { "libs/$it.name" }.join(' ')
+    }
+
+    from {
+        configurations
+                .compile
+                .findAll { !it.name.endsWith('pom') }
+                .collect { it.isDirectory() ? it : zipTree(it) }
+    }
+
+}

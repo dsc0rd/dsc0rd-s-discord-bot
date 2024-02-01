@@ -1,0 +1,11 @@
+{
+  "prefix": "~",
+  "allowedCommands": [
+    "say",
+    "8ball",
+    "choose",
+    "cmd",
+    "commandHelp"
+  ],
+  "commandFile": "./commands.json"
+}
